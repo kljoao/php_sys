@@ -1,0 +1,98 @@
+/* FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+/* CSS PAGES */
+@import url(assets/styles/index.css);
+@import url(assets/styles/fonts/fonts.css);
+
+
+/* STYLE PADRÃO */
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: #000000;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+
+/* HEADER STYLE */
+.header{
+    margin: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 500px;
+}
+
+.sicoob-logo{
+    width: 130px;
+}
+
+.header-itens{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-separador{
+    height: 0.5px;
+    border: 0.1px;
+    opacity: 15%;
+    background-color: #dddddd;
+}
+
+.header-itens-links{
+    display: flex;
+    gap: 25px;
+}
+
+.header-item:hover{
+    color: #00AE9D;
+}
+
+.header-itens-separador{
+    content: '';
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30000px;
+    height: 30px;
+}
+
+.admin-button{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 500px;
+    border: none;
+    transform: .3s;
+}
+
+.admin-button:hover{
+    background-color: #00AE9D;
+    color: #FFFFFF;
+}
+
+@media(max-width: 1154px){
+    .header{
+        gap: 200px;
+    }
+}
+
+@media(max-width: 870px){
+    .header{
+        gap: 50px;
+    }
+}
+
+@media(max-width: 768px){
+    
+}
