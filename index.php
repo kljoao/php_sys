@@ -65,7 +65,18 @@
         </div>
     </header>
 
-    
     <hr class="header-separador">
+
+    <main class="index-main">
+        <div>
+            <a href="" class="index-inovacao norma-asap-itens-white">
+                <button class="new-btn norma-asap-itens-white">Novo</button>
+                Conheça o Novo Sicoob Empresas! <i class="fa-solid fa-arrow-right inovacao-arrow"></i>
+            </a>
+        </div>
+
+        <img src="assets/img/logo-prince.png" alt="" class="index-logo">
+        <p>Bem vindo ao sistema Lotus do Sicoob Empresas. Aqui você pode acessar todos os principais sistemas da empresa.</p>
+    </main>
 </body>
 </html>

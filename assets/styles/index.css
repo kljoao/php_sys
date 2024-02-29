@@ -1,0 +1,39 @@
+.index-main{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.index-logo{
+    width: 450px;
+}
+
+.index-inovacao{
+    border: 1px solid rgba(255, 255, 255, 0.145);
+    border-radius: 500px;
+    padding: 6px;
+}
+
+.index-inovacao:hover{
+    border: 1px solid rgba(255, 255, 255, 0.47);
+    padding: 10px;
+}
+
+.new-btn{
+    background-color: rgb(0, 201, 0);
+    border-radius: 500px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.inovacao-arrow{
+    color: #FFFFFF;
+    margin-left: 10px;
+    transition: .3s;
+}
+
+
+.index-inovacao:hover .inovacao-arrow{
+    border: 1px solid rgb(0, 201, 0);
+    border-radius: 500px;
+}
