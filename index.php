@@ -24,19 +24,19 @@
         <div class="header-itens">
             <ul class="header-itens-links">
                 <a href="">
-                    <li class="header-item norma-asap-itens-white">Início</li>
+                    <li class="header-item norma-asap-itens-white-small">Início</li>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white">Ramais</li>
+                    <li class="header-item norma-asap-itens-white-small">Ramais</li>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white">Chamados</li>
+                    <li class="header-item norma-asap-itens-white-small">Chamados</li>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white">Docs</li>
+                    <li class="header-item norma-asap-itens-white-small">Links</li>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white">FAQ</li>
+                    <li class="header-item norma-asap-itens-white-small">FAQ</li>
                 </a>
             </ul>
 
@@ -45,7 +45,7 @@
             <div class="header-itens">
                 <ul>
                     <a href="">
-                        <li class="norma-asap-itens-white">Login</li>
+                        <li class="norma-asap-itens-white-small">Login</li>
                     </a>
                 </ul>
                 <ul>
@@ -69,14 +69,48 @@
 
     <main class="index-main">
         <div>
-            <a href="" class="index-inovacao norma-asap-itens-white">
-                <button class="new-btn norma-asap-itens-white">Novo</button>
+            <a href="" class="index-inovacao norma-asap-itens-white-small">
+                <button class="new-btn norma-asap-itens-white-small" style="color: white !important;">Novo</button>
                 Conheça o Novo Sicoob Empresas! <i class="fa-solid fa-arrow-right inovacao-arrow"></i>
             </a>
         </div>
 
-        <img src="assets/img/logo-prince.png" alt="" class="index-logo">
-        <p>Bem vindo ao sistema Lotus do Sicoob Empresas. Aqui você pode acessar todos os principais sistemas da empresa.</p>
+        <div class="flex justify-center items-center">
+            <img src="assets/img/logo-prince.png" alt="" class="index-logo">
+        </div>    
+        <p class="norma-asap-itens-white-medium">Bem vindo ao sistema de integração do Sicoob Empresas.<br> Aqui você pode acessar todos os principais sistemas da empresa.</p>
+        <div class="index-btn">
+            <button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Tutoriais</button>
+            <button class="norma-asap-itens-white-small btnSecond" style="color: white !important;">Relatar Problemas</button>
+        </div>
     </main>
+
+    <section class="index-information-container">
+        <span class="index-information-separador"></span>
+        <div class="index-information">
+            <div>
+                <h2 class="norma-asap-itens-white-small" style="color: #FFFFFF; font-size: 20px;">Mais Otimizado</h1>
+                <p class="norma-asap-itens-white-small">Sistema Integrado</p>
+            </div>
+            <div>
+                <h2 class="norma-asap-itens-white-small" style="color: #FFFFFF; font-size: 20px;">Mais Funcionalidades</h2>
+                <p class="norma-asap-itens-white-small">Intranet Completa</p>
+            </div>
+            <div>
+                <h2 class="norma-asap-itens-white-small" style="color: #FFFFFF; font-size: 20px;">Novas Funções</h2>
+                <p class="norma-asap-itens-white-small">Totalmente Completo</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <span class="index-information-separador"></span>
+        </div>
+    </section>
+
+    <!-- <section>
+        <p>SUPORTE</p>
+        <h1>Perguntas Frequentes</h1>
+    </section> -->
+
+    <script src="assets/scripts/index.js"></script>
 </body>
 </html>
