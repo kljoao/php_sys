@@ -24,19 +24,19 @@
         <div class="header-itens">
             <ul class="header-itens-links">
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">Início</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Início</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">Ramais</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Ramais</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">Chamados</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Chamados</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">Links</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Links</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">FAQ</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">FAQ</li norma-asap-itens-white-small>
                 </a>
             </ul>
 
@@ -45,17 +45,17 @@
             <div class="header-itens">
                 <ul>
                     <a href="">
-                        <li class="norma-asap-itens-white-small">Login</li>
+                        <li norma-asap-itens-white-small class="norma-asap-itens-white-small">Login</li norma-asap-itens-white-small>
                     </a>
                 </ul>
                 <ul>
-                    <li>
+                    <li norma-asap-itens-white-small>
                         <a href="">
                             <button class="admin-button norma-asap-itens-black" style="cursor:pointer;">
                                 Administrador
                             </button>
                         </a>
-                    </li>
+                    </li norma-asap-itens-white-small>
                 </ul>
             </div>
 
@@ -106,10 +106,49 @@
         </div>
     </section>
 
-    <!-- <section>
-        <p>SUPORTE</p>
-        <h1>Perguntas Frequentes</h1>
-    </section> -->
+    <section class="index-ramal-container">
+        <div class="index-ramal">
+            <div>
+                <h1 class="norma-asap-itens-white-big" style="color: white;">Com Algumas Urgência?<br>Use nossos <span class="ramais">Ramais</span></h1>
+                <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">O ramal só deverá ser usado em último caso (emergências),<br>utilize outras formas de contato como e-mail ou teams.</p>
+                <div class="index-ramais-buttons">
+                    <button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Ramais</button>
+                    <button class="norma-asap-itens-white-small btnSecond" style="color: white !important;">Relatar Problemas</button>
+                </div>
+            </div>
+            <div>
+                <img src="assets/img/ramal.svg" alt="" width="520px">
+            </div>
+        </div>
+    </section>
+
+    <section class="index-ti-container">
+        <div>
+            <h1 class="norma-asap-itens-white-big" style="color: white;">Suporte Interno Completo<br>ao Sistema</h1>
+            <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">Abra um chamado com a equipe de TI<br>para que o seu problema seja solucionado<br>o mais rápido o possível.</p>
+            <div style="margin-top:10px;">
+                <ul class="ti-ul">
+                    <span class="ti-li ti-separador"></span>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-envelope" style="color: white;"></i>Contato via E-mail</li norma-asap-itens-white-small>
+                    <span class="ti-li ti-separador"></span>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-brands fa-rocketchat" style="color: white;"></i>SLA de até 2 horas</li norma-asap-itens-white-small>
+                    <span class="ti-li ti-separador"></span>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-chart-line" style="color: white;"></i>Desenvolvimento de Processos</li norma-asap-itens-white-small>
+                    <span class="ti-li ti-separador"></span>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-network-wired" style="color: white;"></i>Controle de Rede</li norma-asap-itens-white-small>
+                    <span class="ti-li ti-separador"></span>
+                </ul>
+                <div class="index-ramais-buttons">
+                    <button class="norma-asap-itens-white-small tiBtn" style="color: white !important;">Abrir Chamado</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <img src="assets/img/chamados.svg" alt="" width="520px" class="ti-img">
+        </div>
+    </section>
+
+    <h1 style="margin-bottom: 500px;">.</h1>
 
     <script src="assets/scripts/index.js"></script>
 </body>

@@ -19,6 +19,13 @@
     transition: .3s;
 }
 
+.norma-asap-itens-white-big{
+    font-family: "Gabarito", sans-serif;
+    color: rgba(255, 255, 255, 0.833);
+    font-size: 32px;
+    transition: .3s;
+}
+
 .norma-asap-itens-black{
     font-family: "Gabarito", sans-serif;
     color: #000000;
