@@ -1,5 +1,5 @@
 <?php
-include('app/conection.php');
+    include('app/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -30,41 +30,43 @@ include('app/conection.php');
             <img src="assets/img/logo-empresas.png" alt="" class="sicoob-logo">
         </div>
         <div class="header-itens">
-            <ul class="header-itens-links js-menu">
+            <ul class="header-itens-links">
                 <a href="index.php">
-                    <li class="header-item norma-asap-itens-white-small">Início</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Início</li norma-asap-itens-white-small>
                 </a>
-                <a href="#ramais">
-                    <li class="header-item norma-asap-itens-white-small">Ramais</li>
+                <a href="assets/pages/ramais.php">
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Ramais</li norma-asap-itens-white-small>
                 </a>
                 <a href="#chamados">
-                    <li class="header-item norma-asap-itens-white-small">Chamados</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Chamados</li norma-asap-itens-white-small>
                 </a>
                 <a href="#links">
-                    <li class="header-item norma-asap-itens-white-small">Links</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Links</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
-                    <li class="header-item norma-asap-itens-white-small">FAQ</li>
+                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">FAQ</li norma-asap-itens-white-small>
                 </a>
             </ul>
 
             <span class="header-itens-separador"></span>
 
             <div class="header-itens">
-                <ul>
-                    <a href="">
-                        <li class="header-item norma-asap-itens-white-small">Login</li>
-                    </a>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="assets/pages/loginadmin.php">
-                            <button class="admin-button norma-asap-itens-black" style="cursor:pointer;">
-                                Administrador
-                            </button>
-                        </a>
-                    </li>
-                </ul>
+                <p>Bem vindo, <?php echo alterarNome($_SESSION['nome']);?></p>
+                <?php
+                            function alterarNome($nomeCompleto){
+                                    // Divide o nome completo em partes
+                                    $partesNome = explode(' ', $nomeCompleto);
+
+                                    // Obtém o primeiro nome
+                                    $primeiroNome = $partesNome[0];
+
+                                    // Obtém o último nome (último elemento do array)
+                                    $ultimoNome = end($partesNome);
+
+                                    // Retorna a combinação do primeiro e último nome
+                                    return $primeiroNome . ' ' . $ultimoNome;
+                            }
+                        ?>
             </div>
 
             <div>
@@ -142,20 +144,20 @@ include('app/conection.php');
         </div>
     </section>
 
-    <section class="index-ti-container" id="chamados">
+    <section class="index-ti-container">
         <div>
             <h1 class="norma-asap-itens-white-big" style="color: white;">Suporte Interno Completo<br>ao Sistema</h1>
             <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">Abra um chamado com a equipe de TI<br>para que o seu problema seja solucionado<br>o mais rápido o possível.</p>
             <div style="margin-top:10px;">
                 <ul class="ti-ul">
                     <span class="ti-li ti-separador"></span>
-                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-envelope" style="color: white;"></i>Contato via E-mail</li>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-envelope" style="color: white;"></i>Contato via E-mail</li norma-asap-itens-white-small>
                     <span class="ti-li ti-separador"></span>
-                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-brands fa-rocketchat" style="color: white;"></i>SLA de até 2 horas</li>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-brands fa-rocketchat" style="color: white;"></i>SLA de até 2 horas</li norma-asap-itens-white-small>
                     <span class="ti-li ti-separador"></span>
-                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-chart-line" style="color: white;"></i>Desenvolvimento de Processos</li>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-chart-line" style="color: white;"></i>Desenvolvimento de Processos</li norma-asap-itens-white-small>
                     <span class="ti-li ti-separador"></span>
-                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-network-wired" style="color: white;"></i>Controle de Rede</li>
+                    <li class="ti-li norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582);"><i class="fa-solid fa-network-wired" style="color: white;"></i>Controle de Rede</li norma-asap-itens-white-small>
                     <span class="ti-li ti-separador"></span>
                 </ul>
                 <div class="index-ramais-buttons">
@@ -168,7 +170,7 @@ include('app/conection.php');
         </div>
     </section>
 
-        <section class="index-ramal-container" id="ramais">
+        <section class="index-ramal-container" id="chamados">
         <div class="index-ramal">
             <div>
                 <h1 class="norma-asap-itens-white-big" style="color: white;">Com Algumas Urgência?<br>Use nossos <span class="ramais">Ramais</span></h1>
@@ -193,12 +195,12 @@ include('app/conection.php');
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-building-columns"></i>
-                <a href="https://gestaodepessoas.sicoob.com.br/" target="_blank">
+                <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Cursos</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Acesso direto ao universisdade Sicoob, onde você acessa todos os seus cursos.</p>
                 <hr>
-                <a href="https://gestaodepessoas.sicoob.com.br/" target="_blank" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
+                <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
                     Acessar site
                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
@@ -208,12 +210,12 @@ include('app/conection.php');
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-ticket-simple"></i>
-                <a href="https://atendimento.sisbr.coop.br/tas/public/login/form" target="_blank">
+                <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portal CCS</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Portal para abertura de chamados junto a Central, ou nossa Confederação.</p>
                 <hr>
-                <a href="https://atendimento.sisbr.coop.br/tas/public/login/form" target="_blank" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
+                <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
                     Acessar site
                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
@@ -223,12 +225,12 @@ include('app/conection.php');
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-money-check-dollar"></i>
-                <a href="https://web.sipag.com.br/sipagnet/emi/site" target="_blank">
+                <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Sipagnet</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Link de acesso direto para a plataforma Sipagnet.</p>
                 <hr>
-                <a href="https://web.sipag.com.br/sipagnet/emi/site" target="_blank" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
+                <a href="https://web.sipag.com.br/sipagnet/emi/site" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
                     Acessar site
                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
@@ -240,12 +242,12 @@ include('app/conection.php');
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-gear"></i>
-                <a href="https://app.pipefy.com/organizations/110391" target="_blank">
+                <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Pipefy</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Acompanhamento de processos gerais internos da empresa.</p>
                 <hr>
-                <a href="https://app.pipefy.com/organizations/110391" target="_blank" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
+                <a href="https://app.pipefy.com/organizations/110391" class="inline-flex font-medium items-center text-blue-600 hover:underline" style="margin-top: 10px;">
                     Acessar site
                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
@@ -254,6 +256,9 @@ include('app/conection.php');
             </div>
 
         </div>
+
+        
+
     </section>
 
     <footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
