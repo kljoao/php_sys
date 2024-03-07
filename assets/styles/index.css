@@ -258,6 +258,26 @@
   font-size: 25px;
 }
 
+.name-icon{
+  cursor: pointer;
+  border: none;
+}
+
+.name-icon-i{
+  color: white;
+  margin-left: -10px;
+}
+
+.itens-dropdown{
+  position: absolute;
+  margin-top: 200px;
+  display: none;
+}
+
+.active{
+  display: block !important;
+}
+
 @media(max-width: 1024px){
   .apresentação-i-contorno-right, .apresentação-i, .apresentação-i-contorno-left{
     padding: 10px 40px 10px 10px;

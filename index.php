@@ -10,7 +10,7 @@ include('app/conection.php');
     <title>Oficial Sicoob Empresas - Intranet</title>
 
     <!-- ICON IMPORT -->
-    <link rel="shortcut icon" href="assets/imgfavicon.ico" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
 
     <!-- CSS IMPORT -->
     <link rel="stylesheet" href="style.css">
@@ -27,7 +27,7 @@ include('app/conection.php');
 <body>
     <header class="header">
         <div>
-            <img src="assets/img/logo-empresas.png" alt="" class="sicoob-logo">
+            <a href="index.php"><img src="assets/img/logo-empresas.png" alt="" class="sicoob-logo"></a>
         </div>
         <div class="header-itens">
             <ul class="header-itens-links js-menu">
@@ -52,13 +52,13 @@ include('app/conection.php');
 
             <div class="header-itens">
                 <ul>
-                    <a href="">
+                    <a href="assets/pages/login.php">
                         <li class="header-item norma-asap-itens-white-small">Login</li>
                     </a>
                 </ul>
                 <ul>
                     <li>
-                        <a href="assets/pages/loginadmin.php">
+                        <a href="assets/pages/login.php">
                             <button class="admin-button norma-asap-itens-black" style="cursor:pointer;">
                                 Administrador
                             </button>
@@ -159,7 +159,7 @@ include('app/conection.php');
                     <span class="ti-li ti-separador"></span>
                 </ul>
                 <div class="index-ramais-buttons">
-                    <button class="norma-asap-itens-white-small tiBtn" style="color: white !important;">Abrir Chamado</button>
+                    <a href="https://app.pipefy.com/public/form/qzIn9XqR"><button class="norma-asap-itens-white-small tiBtn" style="color: white !important;">Abrir Chamado</button></a>
                 </div>
             </div>
         </div>
@@ -174,7 +174,7 @@ include('app/conection.php');
                 <h1 class="norma-asap-itens-white-big" style="color: white;">Com Algumas Urgência?<br>Use nossos <span class="ramais">Ramais</span></h1>
                 <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">O ramal só deverá ser usado em último caso (emergências),<br>utilize outras formas de contato como e-mail ou teams.</p>
                 <div class="index-ramais-buttons">
-                    <a href="https://app.pipefy.com/public/form/qzIn9XqR"><button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Ramais</button></a>
+                    <a href="assets/pages/ramais.php"><button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Ramais</button></a>
                     <button class="norma-asap-itens-white-small btnSecond" style="color: white !important;">Relatar Problemas</button>
                 </div>
             </div>

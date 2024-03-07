@@ -1,3 +1,9 @@
+<?php
+    include('../../app/conection.php');
+    $sqlview = "SELECT * FROM usuarios ORDER BY nome DESC";
+    $result = $pdo->query($sqlview);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,20 +29,20 @@
 <body>
     <header class="header">
         <div>
-            <img src="../img/logo-empresas.png" alt="" class="sicoob-logo">
+            <a href="../../index.php"><img src="../img/logo-empresas.png" alt="" class="sicoob-logo"></a>
         </div>
         <div class="header-itens">
             <ul class="header-itens-links">
-                <a href="">
+                <a href="../../index.php">
                     <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Início</li norma-asap-itens-white-small>
                 </a>
-                <a href="">
+                <a href="ramais.php">
                     <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Ramais</li norma-asap-itens-white-small>
                 </a>
-                <a href="">
+                <a href="../../index.php #chamados">
                     <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Chamados</li norma-asap-itens-white-small>
                 </a>
-                <a href="">
+                <a href="../../index.php #links">
                     <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Links</li norma-asap-itens-white-small>
                 </a>
                 <a href="">
@@ -68,7 +74,125 @@
             </div>
         </div>
     </header>
-
     <hr class="header-separador">
+    <main style="margin-top: 50px;">
+        <h1 class="norma-asap-itens-white-big" style="color: white; text-align: center;">Pesquisar Colaborador</h1>
+        <form class="max-w-md mx-auto">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Procure Nomes, PAs..." required />
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pesquisar</button>
+            </div>
+        </form>
+    </main>
+
+    <section class="ramais-container">
+        <?php
+        try{
+            // Sua consulta SQL para selecionar dados
+            $sql = "SELECT * FROM usuarios ORDER BY nome ASC";
+            
+            // Preparar a consulta
+            $stmt = $pdo->query($sql);
+            
+            // Verificar se a consulta foi preparada corretamente
+            if ($stmt === false) {
+                throw new Exception("Erro ao preparar a consulta.");
+            }
+            while ($user_data = $stmt->fetch(PDO::FETCH_ASSOC)){
+                echo '<div>
+                <div class="ramal-card-container">
+                    <div class="ramal-top">
+                        <h2 class="norma-asap-itens-white-big-r">'.$user_data['nome'].'</h2>
+                        <p class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['setor'].'</p>
+                        <p class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['pa'].'</p>
+                    </div>
+                </div>
+
+                <div class="ramal-bottom">
+                    <br>
+                    <p class="norma-roboto-itens-black">Ramal</p>
+                    <br>
+                    <h1 class="big-roboto-itens-black">'.$user_data['ramal'].'</h1>
+                    <br>
+                    <hr>
+                    <br>
+                    <p class="norma-roboto-itens-black"><i class="fa fa-envelope"></i> | '.$user_data['email'].'</p>
+                    <p class=" norma-roboto-itens-black"><i class="fa fa-phone fa-rotate-90"></i> | '.$user_data['telefone'].'</p>
+                    <br>
+                </div>
+            </div>
+        </div>';
+            }
+        }
+        catch (Exception $e) {
+            echo "Ocorreu um erro: " . $e->getMessage();
+        }
+        ?>
+    </section>
+
+<footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap text-left lg:text-left">
+      <div class="w-full lg:w-6/12 px-4">
+        <h4 class="text-3xl norma-asap-itens-white-big" style="color: white;">Sicoob Empresas</h4>
+        <h5 class="norma-asap-itens-white-small">
+          Intranet oficial do Sicoob Empresas.
+        </h5>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="flex flex-wrap items-top mb-6">
+          <div class="w-full lg:w-4/12 px-4 ml-auto">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Links Importantes</span>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">Inicio</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Ramais</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Links</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Chamados</a>
+              </li>
+            </ul>
+          </div>
+          <div class="w-full lg:w-4/12 px-4">
+            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+              </li>
+              <li>
+                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-blueGray-300">
+    <div class="flex flex-wrap items-center md:justify-between justify-center">
+      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+        <div class="norma-asap-itens-white-small">
+          Copyright © <span id="get-current-year">2024</span> - Por Sicoob Empresas
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

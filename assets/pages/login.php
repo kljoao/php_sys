@@ -1,38 +1,37 @@
 <?php
-include('../../app/conection.php');
+    include('../../app/conection.php');
+    session_start();
 
-session_start();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['senha'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['senha'];
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && $password === $user['senha']) {
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['nome'] = $user['nome'];
-            $_SESSION['email'] = $user['email'];
-            header('Location: indexadmin.php');
-        } else {
-            echo "<script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Usuário ou senha inválidos.',
-                showConfirmButton: false,
-                timer: 1500
-              });
-            </script>";
+            if ($user && $password === $user['senha']) {
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['nome'] = $user['nome'];
+                $_SESSION['email'] = $user['email'];
+                header('Location: indexadmin.php');
+            } else {
+                echo "<script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Usuário ou senha inválidos.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                </script>";
+            }
+        } catch (PDOException $e) {
+            die("Erro na consulta SQL: ");
         }
-    } catch (PDOException $e) {
-        die("Erro na consulta SQL: ");
     }
-}
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,14 @@
 <?php
-    include('app/config.php');
+    include('../../app/conection.php');
+    include('../../app/protection.php');
+
+    if(isset($_POST['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../../index.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +19,10 @@
     <title>Oficial Sicoob Empresas - Intranet</title>
 
     <!-- ICON IMPORT -->
-    <link rel="shortcut icon" href="assets/imgfavicon.ico" />
+    <link rel="shortcut icon" href="../img/favicon.ico" />
 
     <!-- CSS IMPORT -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../style.css">
 
     <!-- FONT AWESOME IMPORT -->
     <script src="https://kit.fontawesome.com/4713c304f5.js" crossorigin="anonymous"></script>
@@ -27,53 +36,69 @@
 <body>
     <header class="header">
         <div>
-            <img src="assets/img/logo-empresas.png" alt="" class="sicoob-logo">
+            <img src="../img/logo-empresas.png" alt="" class="sicoob-logo">
         </div>
         <div class="header-itens">
-            <ul class="header-itens-links">
+            <ul class="header-itens-links js-menu">
                 <a href="index.php">
-                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Início</li norma-asap-itens-white-small>
+                    <li class="header-item norma-asap-itens-white-small">Início</li>
                 </a>
-                <a href="assets/pages/ramais.php">
-                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Ramais</li norma-asap-itens-white-small>
+                <a href="#ramais">
+                    <li class="header-item norma-asap-itens-white-small">Ramais</li>
                 </a>
                 <a href="#chamados">
-                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Chamados</li norma-asap-itens-white-small>
+                    <li class="header-item norma-asap-itens-white-small">Chamados</li>
                 </a>
                 <a href="#links">
-                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Links</li norma-asap-itens-white-small>
+                    <li class="header-item norma-asap-itens-white-small">Links</li>
                 </a>
                 <a href="">
-                    <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">FAQ</li norma-asap-itens-white-small>
+                    <li class="header-item norma-asap-itens-white-small">FAQ</li>
                 </a>
             </ul>
 
             <span class="header-itens-separador"></span>
 
             <div class="header-itens">
-                <p>Bem vindo, <?php echo alterarNome($_SESSION['nome']);?></p>
+                <p class="norma-asap-itens-white-small">Bem vindo, <span style="color: white;"><?php echo alterarNome($_SESSION['nome']);?></span></p>
                 <?php
-                            function alterarNome($nomeCompleto){
-                                    // Divide o nome completo em partes
-                                    $partesNome = explode(' ', $nomeCompleto);
-
-                                    // Obtém o primeiro nome
-                                    $primeiroNome = $partesNome[0];
-
-                                    // Obtém o último nome (último elemento do array)
-                                    $ultimoNome = end($partesNome);
-
-                                    // Retorna a combinação do primeiro e último nome
-                                    return $primeiroNome . ' ' . $ultimoNome;
-                            }
-                        ?>
+                    function alterarNome($nomeCompleto){
+                        // Divide o nome completo em partes
+                        $partesNome = explode(' ', $nomeCompleto);
+                        // Obtém o primeiro nome
+                        $primeiroNome = $partesNome[0];
+                        // Obtém o último nome (último elemento do array)
+                        $ultimoNome = end($partesNome);
+                        // Retorna a combinação do primeiro e último nome
+                        return $primeiroNome . ' ' . $ultimoNome;
+                    }
+                ?>
+                <i id="seta-down" class="name-icon-i fa-solid fa-chevron-down" style="cursor: pointer;"></i>
+                <div id="dropdown" class="itens-dropdown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cadastro</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Configurações</a>
+                    </li>
+                    <li>
+                        <form method="POST" action="" class="block px-4 py-2 hover:bg-gray-100 w-48 dark:hover:bg-gray-600 dark:hover:text-white" style="cursor: pointer;">
+                            <button name="logout" href="#" class="w-48" style="margin-left: 0px; text-align: left;">Log out</button>
+                        </form>
+                    </li>
+                    </ul>
+                </div>
             </div>
 
-            <div>
+        <div>
 
-            </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <hr class="header-separador">
 
@@ -86,7 +111,7 @@
         </div>
 
         <div class="flex justify-center items-center">
-            <img src="assets/img/logo-prince.png" alt="" class="index-logo">
+            <img src="../img/logo-prince.png" alt="" class="index-logo">
         </div>    
         <p class="norma-asap-itens-white-medium">Bem vindo ao sistema de integração do Sicoob Empresas.<br> Aqui você pode acessar todos os principais sistemas da empresa.</p>
         <div class="index-btn">
@@ -144,7 +169,7 @@
         </div>
     </section>
 
-    <section class="index-ti-container">
+    <section id="chamados" class="index-ti-container">
         <div>
             <h1 class="norma-asap-itens-white-big" style="color: white;">Suporte Interno Completo<br>ao Sistema</h1>
             <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">Abra um chamado com a equipe de TI<br>para que o seu problema seja solucionado<br>o mais rápido o possível.</p>
@@ -166,11 +191,11 @@
             </div>
         </div>
         <div>
-            <img src="assets/img/chamados.svg" alt="" width="520px" class="ti-img">
+            <img src="../img/chamados.svg" alt="" width="520px" class="ti-img">
         </div>
     </section>
 
-        <section class="index-ramal-container" id="chamados">
+        <section class="index-ramal-container" id="ramais">
         <div class="index-ramal">
             <div>
                 <h1 class="norma-asap-itens-white-big" style="color: white;">Com Algumas Urgência?<br>Use nossos <span class="ramais">Ramais</span></h1>
@@ -181,7 +206,7 @@
                 </div>
             </div>
             <div>
-                <img class="ramalimg"src="assets/img/ramal.svg" alt="" width="520px">
+                <img class="ramalimg"src="../img/ramal.svg" alt="" width="520px">
             </div>
         </div>
     </section>
@@ -261,7 +286,7 @@
 
     </section>
 
-    <footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
+<footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap text-left lg:text-left">
       <div class="w-full lg:w-6/12 px-4">
@@ -320,6 +345,6 @@
   </div>
 </footer>
 
-    <script src="assets/scripts/index.js"></script>
+    <script src="../scripts/index.js"></script>
 </body>
 </html>

@@ -19,6 +19,13 @@
     transition: .3s;
 }
 
+.norma-asap-itens-white-medium-w{
+    font-family: "Roboto", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 19px;
+    transition: .3s;
+}
+
 .norma-asap-itens-white-big{
     font-family: "Gabarito", sans-serif;
     color: rgba(255, 255, 255, 0.833);
@@ -26,9 +33,32 @@
     transition: .3s;
 }
 
+.norma-asap-itens-white-big-r{
+    font-family: "Roboto", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-weight: 500;
+    transition: .3s;
+}
+
 .norma-asap-itens-black{
     font-family: "Gabarito", sans-serif;
     color: #000000;
     font-size: 15px;
+    transition: .3s;
+}
+
+.norma-roboto-itens-black{
+    font-family: "Roboto", sans-serif;
+    color: #000000;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.big-roboto-itens-black{
+    font-family: "Roboto", sans-serif;
+    color: #000000;
+    font-weight: bold;
+    font-size: 50px;
     transition: .3s;
 }
