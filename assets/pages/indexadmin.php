@@ -36,11 +36,11 @@
 <body>
     <header class="header">
         <div>
-            <img src="../img/logo-empresas.png" alt="" class="sicoob-logo">
+            <a href="indexadmin.php"><img src="../img/logo-empresas.png" alt="" class="sicoob-logo"></a>
         </div>
         <div class="header-itens">
             <ul class="header-itens-links js-menu">
-                <a href="index.php">
+                <a href="indexadmin.php">
                     <li class="header-item norma-asap-itens-white-small">Início</li>
                 </a>
                 <a href="#ramais">
@@ -77,10 +77,10 @@
                 <div id="dropdown" class="itens-dropdown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relatórios</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cadastro</a>
+                        <a href="cadastro.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cadastro</a>
                     </li>
                     <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Configurações</a>
@@ -186,7 +186,7 @@
                     <span class="ti-li ti-separador"></span>
                 </ul>
                 <div class="index-ramais-buttons">
-                    <button class="norma-asap-itens-white-small tiBtn" style="color: white !important;">Abrir Chamado</button>
+                    <a href="https://app.pipefy.com/public/form/qzIn9XqR"><button class="norma-asap-itens-white-small tiBtn" style="color: white !important;">Abrir Chamado</button></a>
                 </div>
             </div>
         </div>
@@ -201,7 +201,7 @@
                 <h1 class="norma-asap-itens-white-big" style="color: white;">Com Algumas Urgência?<br>Use nossos <span class="ramais">Ramais</span></h1>
                 <p class="norma-asap-itens-white-small" style="color: rgba(255, 255, 255, 0.582); margin-top: 10px;">O ramal só deverá ser usado em último caso (emergências),<br>utilize outras formas de contato como e-mail ou teams.</p>
                 <div class="index-ramais-buttons">
-                    <a href="https://app.pipefy.com/public/form/qzIn9XqR"><button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Ramais</button></a>
+                    <a href="ramais.php"><button class="norma-asap-itens-white-small btnPrincipal" style="color: white !important;">Acessar Ramais</button></a>
                     <button class="norma-asap-itens-white-small btnSecond" style="color: white !important;">Relatar Problemas</button>
                 </div>
             </div>

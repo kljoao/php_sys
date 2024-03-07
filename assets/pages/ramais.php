@@ -54,13 +54,13 @@
 
             <div class="header-itens">
                 <ul>
-                    <a href="">
+                    <a href="login.php">
                         <li norma-asap-itens-white-small class="header-item norma-asap-itens-white-small">Login</li norma-asap-itens-white-small>
                     </a>
                 </ul>
                 <ul>
                     <li norma-asap-itens-white-small>
-                        <a href="">
+                        <a href="login.php">
                             <button class="admin-button norma-asap-itens-black" style="cursor:pointer;">
                                 Administrador
                             </button>
@@ -77,7 +77,7 @@
     <hr class="header-separador">
     <main style="margin-top: 50px;">
         <h1 class="norma-asap-itens-white-big" style="color: white; text-align: center;">Pesquisar Colaborador</h1>
-        <form class="max-w-md mx-auto">   
+        <form class="max-w-md mx-auto" id="search-form">   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -86,7 +86,6 @@
                     </svg>
                 </div>
                 <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Procure Nomes, PAs..." required />
-                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pesquisar</button>
             </div>
         </form>
     </main>
@@ -105,12 +104,12 @@
                 throw new Exception("Erro ao preparar a consulta.");
             }
             while ($user_data = $stmt->fetch(PDO::FETCH_ASSOC)){
-                echo '<div>
+                echo '<div id="ramal-id">
                 <div class="ramal-card-container">
                     <div class="ramal-top">
-                        <h2 class="norma-asap-itens-white-big-r">'.$user_data['nome'].'</h2>
-                        <p class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['setor'].'</p>
-                        <p class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['pa'].'</p>
+                        <h2 id="nome" class="norma-asap-itens-white-big-r">'.$user_data['nome'].'</h2>
+                        <p id="setor" class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['setor'].'</p>
+                        <p id="pa" class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['pa'].'</p>
                     </div>
                 </div>
 
@@ -118,12 +117,12 @@
                     <br>
                     <p class="norma-roboto-itens-black">Ramal</p>
                     <br>
-                    <h1 class="big-roboto-itens-black">'.$user_data['ramal'].'</h1>
+                    <h1 id="ramal" class="big-roboto-itens-black">'.$user_data['ramal'].'</h1>
                     <br>
                     <hr>
                     <br>
-                    <p class="norma-roboto-itens-black"><i class="fa fa-envelope"></i> | '.$user_data['email'].'</p>
-                    <p class=" norma-roboto-itens-black"><i class="fa fa-phone fa-rotate-90"></i> | '.$user_data['telefone'].'</p>
+                    <p id="email" class="norma-roboto-itens-black"><i class="fa fa-envelope"></i> | '.$user_data['email'].'</p>
+                    <p id="telefone" class="norma-roboto-itens-black"><i class="fa fa-phone fa-rotate-90"></i> | '.$user_data['telefone'].'</p>
                     <br>
                 </div>
             </div>
@@ -140,6 +139,7 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap text-left lg:text-left">
       <div class="w-full lg:w-6/12 px-4">
+        <img src="../img/empresas.png" alt="" width="320px" style="margin-left: -30px;">
         <h4 class="text-3xl norma-asap-itens-white-big" style="color: white;">Sicoob Empresas</h4>
         <h5 class="norma-asap-itens-white-small">
           Intranet oficial do Sicoob Empresas.
@@ -148,36 +148,36 @@
       <div class="w-full lg:w-6/12 px-4">
         <div class="flex flex-wrap items-top mb-6">
           <div class="w-full lg:w-4/12 px-4 ml-auto">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Links Importantes</span>
+            <span class="norma-asap-itens-white-medium block uppercase text-sm font-semibold mb-2">Links Importantes</span>
             <ul class="list-unstyled">
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">Inicio</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">Inicio</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Ramais</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Ramais</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Links</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Links</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Chamados</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Chamados</a>
               </li>
             </ul>
           </div>
           <div class="w-full lg:w-4/12 px-4">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+            <span class="norma-asap-itens-white-medium block uppercase text-sm font-semibold mb-2">Other Resources</span>
             <ul class="list-unstyled">
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -194,5 +194,7 @@
     </div>
   </div>
 </footer>
+
+<script src="../scripts/ramais.js"></script>
 </body>
 </html>

@@ -5,6 +5,13 @@
     transition: .3s;
 }
 
+.norma-asap-itens-white-small-w{
+    font-family: "Gabarito", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    transition: .3s;
+}
+
 .norma-asap-itens-white-medium-2{
     font-family: "Gabarito", sans-serif;
     color: rgb(255, 255, 255);
@@ -15,6 +22,13 @@
 .norma-asap-itens-white-medium{
     font-family: "Gabarito", sans-serif;
     color: rgba(255, 255, 255, 0.833);
+    font-size: 23px;
+    transition: .3s;
+}
+
+.norma-asap-itens-white-medium{
+    font-family: "Gabarito", sans-serif;
+    color: rgb(255, 255, 255);
     font-size: 23px;
     transition: .3s;
 }
