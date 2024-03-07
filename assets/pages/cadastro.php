@@ -129,9 +129,73 @@
                 <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
             </div>
         </div>
-        <div class="single-div">
-            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="align-items: left !important;">Ramal</label>
-            <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+        <div class="cadastro-items-left">
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
+                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+            </div>
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar Ramal</label>
+                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+            </div>
+        </div>
+        <div class="cadastro-items-left">
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
+                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+            </div>
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
+                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(21) 96486-5208">
+            </div>
+        </div>
+        <div class="cadastro-items-left">
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Acesso</label>
+                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Selecionar</option>
+                    <option value="0">Comum</option>
+                    <option value="1">Admin</option>
+                </select>
+            </div>
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PA</label>
+                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Selecionar</option>
+                    <option value="Sede">Sede</option>
+                    <option value="Américas">Américas</option>
+                    <option value="CampoGrande">Campo Grande</option>
+                    <option value="Caxias">Caxias</option>
+                    <option value="NovaIguaçu">Nova Iguaçu</option>
+                    <option value="SãoPaulo">São Paulo</option>
+                    <option value="Centro">Centro - Compartilhado</option>
+                    <option value="Icaraí">Icaraí - Compartilhado</option>
+                </select>
+            </div>
+        </div>
+        <div class="cadastro-items-left">
+            <div>
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Setor</label>
+                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Selecionar</option>
+                    <option value="Cadastro">Cadastro</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Controle">Controle</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Credito">Credito</option>
+                    <option value="Diretoria">Diretoria</option>
+                    <option value="Superintendência">Superintendência</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Secretaria">Secretaria</option>
+                </select>
+            </div>
+        </div>
+        <div class="cadastro-items-left">
+        <div class="flex items-center">
+            <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
+        </div>
         </div>
     </form>
     </section>
