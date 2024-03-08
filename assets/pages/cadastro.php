@@ -9,6 +9,39 @@
         header("Location: ../../index.php");
         exit();
     }
+
+    if(isset($_POST['submit'])){
+        $nome = $_POST['nome'];
+        $cpf = $_POST['cpf'];
+        $email = $_POST['email'];
+        $ramal = $_POST['ramal'];
+        $telefone = $_POST['telefone'];
+        $senha = $_POST['senha'];
+        $acesso = $_POST['acesso'];
+        $pa = $_POST['pa'];
+        $setor = $_POST['setor'];
+
+        $result = pdo_query($pdo, "INSERT INTO usuarios(nome,cpf,email,ramal,telefone,senha,acesso,pa,setor) VALUES ('$nome','$cpf','$email','$ramal','$telefone','$senha','$acesso','$pa','$setor')");
+
+        if($result){
+            echo "<script>
+            Swal.fire({
+                title: 'Usuário Cadastrado!',
+                text: 'Deseja cadastar mais outro usuário?',
+                showDenyButton: true,
+                confirmButtonText: 'Sim',
+                denyButtonText: `Não`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location.href = 'cadastro.php';
+                } else if (result.isDenied) {
+                    window.location.href = 'paineladmin.php';
+                }
+              })
+            </script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +110,7 @@
                 <div id="dropdown" class="itens-dropdown z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relatórios</a>
+                        <a href="../../app/exportar_usuarios.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relatório de Usuários</a>
                     </li>
                     <li>
                         <a href="cadastro.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cadastro</a>
@@ -106,47 +139,48 @@
         <div style="text-align: center; margin: 50px 0px;">
             <h1 class="norma-asap-itens-white-big-r">Cadastrar Novo Colaborador</h1>
         </div>
-        
+
     <form action="" method="POST">
         <div class="cadastro-items-left">
             <div class="cadastro-item">
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="João Luis Bernardo">
+                <p class="cadastro-item-nome">Nome do Usuário Inválido.</p>
+                <input name="nome" type="text" class="nomeInput w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="João Luis Bernardo" required>
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF">
+                <input name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required>
             </div>
         </div>
 
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
+                <input name="email" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar E-mail</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
+                <input name="confirmEmail" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+                <input name="ramal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required>
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar Ramal</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+                <input name="confirmRamal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required>
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
-                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619">
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
+                <input name="telefone" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(21) 96486-5208" required>
             </div>
             <div>
-                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
-                <input type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(21) 96486-5208">
+                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                <input name="senha" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sicoob@4327" required>
             </div>
         </div>
         <div class="cadastro-items-left">
@@ -194,54 +228,60 @@
         <div class="cadastro-items-left">
         <div class="flex items-center">
             <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
+            <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" required>Eu afirmo que as <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">credenciais estão corretas</a>.</label>
         </div>
+        </div>
+        <div class="cadastro-items-left">
+            <div>
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cadastrar</button>
+                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancelar</button>
+            </div>
+            <div>
+                
+            </div>
         </div>
     </form>
     </section>
 
-<footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
+    <footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap text-left lg:text-left">
       <div class="w-full lg:w-6/12 px-4">
-        <h4 class="text-3xl norma-asap-itens-white-big" style="color: white;">Sicoob Empresas</h4>
-        <h5 class="norma-asap-itens-white-small">
-          Intranet oficial do Sicoob Empresas.
-        </h5>
+        <img src="../img/empresas.png" alt="" width="320px" style="margin-left: -30px;">
       </div>
       <div class="w-full lg:w-6/12 px-4">
         <div class="flex flex-wrap items-top mb-6">
           <div class="w-full lg:w-4/12 px-4 ml-auto">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Links Importantes</span>
+            <span class="norma-asap-itens-white-medium block uppercase text-sm font-semibold mb-2">Links Importantes</span>
             <ul class="list-unstyled">
-              <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">Inicio</a>
+            <li>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="indexadmin.php">Inicio</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Ramais</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#ramais">Ramais</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Links</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#links">Links</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Chamados</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="#chamados">Chamados</a>
               </li>
             </ul>
           </div>
           <div class="w-full lg:w-4/12 px-4">
-            <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+            <span class="norma-asap-itens-white-medium block uppercase text-sm font-semibold mb-2">Other Resources</span>
             <ul class="list-unstyled">
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://gestaodepessoas.sicoob.com.br/" target="_blank">Cursos</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://atendimento.sisbr.coop.br/tas/public/login/form" target="_blank">Portal CCS</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://web.sipag.com.br/sipagnet/emi/site" target="_blank">Sipagnet</a>
               </li>
               <li>
-                <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                <a class="norma-asap-itens-white-small hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://app.pipefy.com/organizations/110391" target="_blank">Pipefy</a>
               </li>
             </ul>
           </div>
@@ -259,6 +299,7 @@
   </div>
 </footer>
 
+    <script src="../scripts/cadastro.js"></script>
     <script src="../scripts/index.js"></script>
 </body>
 </html>

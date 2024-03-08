@@ -12,3 +12,11 @@
     text-align: left;
     justify-items: center;
 }
+
+.cadastro-item-nome{
+    color: red;
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 50px;
+    display: none;
+}

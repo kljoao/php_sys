@@ -135,15 +135,11 @@
         ?>
     </section>
 
-<footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
+    <footer class="relative pt-8 pb-6" style="margin-top: 150px; background-color: black;">
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap text-left lg:text-left">
       <div class="w-full lg:w-6/12 px-4">
         <img src="../img/empresas.png" alt="" width="320px" style="margin-left: -30px;">
-        <h4 class="text-3xl norma-asap-itens-white-big" style="color: white;">Sicoob Empresas</h4>
-        <h5 class="norma-asap-itens-white-small">
-          Intranet oficial do Sicoob Empresas.
-        </h5>
       </div>
       <div class="w-full lg:w-6/12 px-4">
         <div class="flex flex-wrap items-top mb-6">
