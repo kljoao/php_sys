@@ -9,39 +9,6 @@
         header("Location: ../../index.php");
         exit();
     }
-
-    if(isset($_POST['submit'])){
-        $nome = $_POST['nome'];
-        $cpf = $_POST['cpf'];
-        $email = $_POST['email'];
-        $ramal = $_POST['ramal'];
-        $telefone = $_POST['telefone'];
-        $senha = $_POST['senha'];
-        $acesso = $_POST['acesso'];
-        $pa = $_POST['pa'];
-        $setor = $_POST['setor'];
-
-        $result = pdo_query($pdo, "INSERT INTO usuarios(nome,cpf,email,ramal,telefone,senha,acesso,pa,setor) VALUES ('$nome','$cpf','$email','$ramal','$telefone','$senha','$acesso','$pa','$setor')");
-
-        if($result){
-            echo "<script>
-            Swal.fire({
-                title: 'Usuário Cadastrado!',
-                text: 'Deseja cadastar mais outro usuário?',
-                showDenyButton: true,
-                confirmButtonText: 'Sim',
-                denyButtonText: `Não`,
-              }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    window.location.href = 'cadastro.php';
-                } else if (result.isDenied) {
-                    window.location.href = 'paineladmin.php';
-                }
-              })
-            </script>";
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +32,99 @@
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
+    <!-- SWEET ALERTS IMPORT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JQUERY IMPORT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
 </head>
 <body>
+
+    <?php
+        if(isset($_POST['cadastroSubmit'])){
+            $nome = $_POST['nome'];
+            $cpf = $_POST['cpf'];
+            $email = $_POST['email'];
+            $ramal = $_POST['ramal'];
+            $telefone = $_POST['telefone'];
+            $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+            $acesso = $_POST['acesso'];
+            $pa = $_POST['pa'];
+            $setor = $_POST['setor'];
+
+            $telefone = preg_replace('/[^0-9\+]/', '', $_POST['telefone']);
+            $cpf = preg_replace('/[^0-9\+]/', '', $_POST['cpf']);
+
+            // Verificação de número de telefone
+            $verifyRamal = $pdo->prepare("SELECT * FROM usuarios WHERE ramal = ?");
+            $verifyRamal->bindParam(1, $ramal); // ou $verifyRamal->bindParam(':ramal', $ramal);
+            $verifyRamal->execute();
+            $ramalResult = $verifyRamal->fetchAll(PDO::FETCH_ASSOC);
+            
+            if(empty($nome) || empty($cpf) || empty($email) || empty($ramal) || empty($telefone) || empty($acesso) || empty($pa) || empty($setor)){
+                echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Existem campos pendentes.",
+                  });
+                  </script>';
+                  return false;
+            }
+            elseif($CpfResult->num_rows > 0){
+                echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Este CPF já foi cadastrado.",
+                });
+            </script>';
+            return false;
+            }
+            elseif($ramalResult->num_rows > 0){
+                echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Ramal já cadastrado.",
+                });
+            </script>';
+            return false;
+        }
+        else {
+            $stmt = $mysqli->prepare("INSERT INTO usuarios(nome,cpf,email,ramal,telefone,acesso,pa,setor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssssssssss", $nome, $cpf,$email,$ramal,$telefone,$acesso,$pa,$setor);
+
+            if($stmt->execute()){
+                echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Usuário cadastrado.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                </script>';
+
+                session_start();
+                $_SESSION['nome'] = $nome;
+                $_SESSION['login'] = $login;
+                $_SESSION['cpf'] = $cpf;
+                $_SESSION['phone'] = $celular;
+
+                $_SESSION['status'] = 'pendente';
+
+                header('Location: verify.php');
+            } else {
+                echo "Erro: " . $stmt->error;
+            }
+        }
+    }
+    ?>
+
+
     <header class="header">
         <div>
             <a href="indexadmin.php"><img src="../img/logo-empresas.png" alt="" class="sicoob-logo"></a>
@@ -192,7 +250,7 @@
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Acesso</label>
-                <select id="acesso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="acesso" name="acesso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="0">Comum</option>
                     <option value="1">Admin</option>
@@ -200,7 +258,7 @@
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PA</label>
-                <select id="pa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="pa" name="pa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="Sede">Sede</option>
                     <option value="Américas">Américas</option>
@@ -216,7 +274,7 @@
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Setor</label>
-                <select id="setor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="setor" name="setor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="Cadastro">Cadastro</option>
                     <option value="Comercial">Comercial</option>
@@ -239,8 +297,8 @@
         </div>
         <div class="cadastro-items-left">
             <div>
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cadastrar</button>
-                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancelar</button>
+                <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" name="cadastroSubmit" value="Cadastrar">
+                <input type="reset" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" value="Cancelar">
             </div>
         </div>
     </form>

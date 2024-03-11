@@ -164,14 +164,14 @@ const ramalError = document.querySelector('.cadastro-item-ramal');
 validRamal = false
 
 ramal.addEventListener("keypress", function(e) {
-    if(!checkChar(e)) {
+    if(!checkCharCPF(e)) {
         e.preventDefault();
         ramalError.style.display = 'block';
         validRamal = false;
 }
 });
 
-function checkChar(e) {
+function checkCharCPF(e) {
     var char = String.fromCharCode(e.keyCode);
     var pattern = '[0-9]';
     if (char.match(pattern)) {
@@ -189,7 +189,7 @@ const confirmRamalError = document.querySelector('.cadastro-item-confirmRamal');
 validRamal = false
 
 confirmRamal.addEventListener("keypress", function(e) {
-    if(!checkChar(e)) {
+    if(!checkCharCPF(e)) {
         e.preventDefault();
         confirmRamalError.style.display = 'block';
         validRamal = false;
@@ -210,7 +210,7 @@ confirmRamal.addEventListener('keypress', () => {
     }
 })
 
-function checkChar(e) {
+function checkCharCPF(e) {
     var char = String.fromCharCode(e.keyCode);
     var pattern = '[0-9]';
     if (char.match(pattern)) {
@@ -239,19 +239,6 @@ const handlePhone = (event) => {
   }
 
 // Validador Telefone
-
-
-function cadastrar(){
-    if(validName && validCPF && validEmail && validRamal == true){
-        const Data = {
-            Nome: nomeInput.value,
-            CPF: cpfInput.value,
-            PA: pa.value,
-            Setor: setor.value,
-            Acesso: acesso.value
-    };
-}
-}
 
 $('form').on('submit', (e) => {
     if(validName && validCPF && validEmail && validRamal == true){
