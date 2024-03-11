@@ -149,44 +149,50 @@
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
-                <input name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required>
+                <p class="cadastro-item-cpf">CPF inválido.</p>
+                <input id="cpf" name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required required maxlength="14">
             </div>
         </div>
 
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
-                <input name="email" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
+                <p class="cadastro-item-email">E-mail inválido.</p>
+                <input id="email" name="email" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar E-mail</label>
-                <input name="confirmEmail" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
+                <p class="cadastro-item-confirmEmail">E-mails não conferem.</p>
+                <input id="confirmEmail" name="confirmEmail" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
-                <input name="ramal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required>
+                <p class="cadastro-item-ramal">Ramal Inválido.</p>
+                <input id="ramal" name="ramal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required required maxlength="4">
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar Ramal</label>
-                <input name="confirmRamal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required>
+                <p class="cadastro-item-confirmRamal">Ramal não confere.</p>
+                <input id="confirmRamal" name="confirmRamal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required required maxlength="4">
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
-                <input name="telefone" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(21) 96486-5208" required>
+                <input id="telefone" name="telefone" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(21) 96486-5208" onkeyup="handlePhone(event)" required maxlength="15">
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                <p class="cadastro-item-confirmRamal">Ramal não confere.</p>
                 <input name="senha" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sicoob@4327" required>
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Acesso</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="acesso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="0">Comum</option>
                     <option value="1">Admin</option>
@@ -194,7 +200,7 @@
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PA</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="pa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="Sede">Sede</option>
                     <option value="Américas">Américas</option>
@@ -210,7 +216,7 @@
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Setor</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="setor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selecionar</option>
                     <option value="Cadastro">Cadastro</option>
                     <option value="Comercial">Comercial</option>
@@ -235,9 +241,6 @@
             <div>
                 <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cadastrar</button>
                 <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancelar</button>
-            </div>
-            <div>
-                
             </div>
         </div>
     </form>

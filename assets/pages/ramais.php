@@ -77,7 +77,7 @@
     <hr class="header-separador">
     <main style="margin-top: 50px;">
         <h1 class="norma-asap-itens-white-big" style="color: white; text-align: center;">Pesquisar Colaborador</h1>
-        <form class="max-w-md mx-auto" id="search-form">   
+        <form class="max-w-md mx-auto" method="GET" action="" id="search-form">   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -85,7 +85,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Procure Nomes, PAs..." required />
+                <input name="search" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Procure Nomes, PAs..." required />
             </div>
         </form>
     </main>
@@ -93,23 +93,37 @@
     <section class="ramais-container">
         <?php
         try{
-            // Sua consulta SQL para selecionar dados
-            $sql = "SELECT * FROM usuarios ORDER BY nome ASC";
-            
-            // Preparar a consulta
-            $stmt = $pdo->query($sql);
-            
+            // Sua consulta SQL original para selecionar todos os dados
+            $sql = "SELECT * FROM usuarios";
+
+            // Verifique se há um parâmetro de pesquisa
+            $params = [];
+            if (!empty($_GET['search'])) {
+                $search = '%' . $_GET['search'] . '%';
+                // Adicione uma condição para cada coluna que deseja pesquisar
+                $sql .= " WHERE nome LIKE ? OR setor LIKE ? OR pa LIKE ? OR ramal LIKE ?";
+                $params = array_fill(0, 4, $search); // Preencha o array de parâmetros com a variável de pesquisa
+            }
+
+            // Adicione a ordenação à consulta
+            $sql .= " ORDER BY nome ASC";
+
+            // Preparar a consulta com parâmetros
+            $stmt = $pdo->prepare($sql);
             // Verificar se a consulta foi preparada corretamente
             if ($stmt === false) {
                 throw new Exception("Erro ao preparar a consulta.");
             }
+            // Executar a consulta com os parâmetros
+            $stmt->execute($params);
+
             while ($user_data = $stmt->fetch(PDO::FETCH_ASSOC)){
                 echo '<div id="ramal-id">
                 <div class="ramal-card-container">
                     <div class="ramal-top">
                         <h2 id="nome" class="norma-asap-itens-white-big-r">'.$user_data['nome'].'</h2>
                         <p id="setor" class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['setor'].'</p>
-                        <p id="pa" class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">'.$user_data['pa'].'</p>
+                        <p id="pa" class="norma-asap-itens-white-medium-w" style="margin-top: -10px;">PA - '.$user_data['pa'].'</p>
                     </div>
                 </div>
 

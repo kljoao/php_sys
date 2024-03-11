@@ -13,10 +13,27 @@
     justify-items: center;
 }
 
-.cadastro-item-nome{
+.cadastro-item-nome, .cadastro-item-cpf, .cadastro-item-email, .cadastro-item-confirmEmail, .cadastro-item-ramal, .cadastro-item-confirmRamal{
     color: red;
     position: absolute;
     margin-top: -30px;
     margin-left: 50px;
     display: none;
+}
+
+.cadastro-item-cpf{
+    margin-top: -32x;
+    margin-left: 30px;
+}
+
+.cadastro-item-email{
+    margin-left: 50px;
+}
+
+.cadastro-item-confirmEmail{
+    margin-left: 120px;
+}
+
+.cadastro-item-confirmRamal{
+    margin-left: 120px;
 }
