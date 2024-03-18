@@ -1,13 +1,106 @@
 <?php
     include('../../app/conection.php');
     include('../../app/protection.php');
+    include('../../app/logout.php');
 
-    if(isset($_POST['logout'])){
-        session_start();
-        session_unset();
-        session_destroy();
-        header("Location: ../../index.php");
-        exit();
+    if(isset($_POST['cadastrar'])){
+        // Recuperando dados do formulário
+        $nome = $_POST['nome'];
+        $cpf = preg_replace('/[^0-9\+]/', '', $_POST['cpf']);
+        $email = $_POST['email'];
+        $ramal = $_POST['ramal'];
+        $senha = $_POST['senha'];
+        $telefone = preg_replace('/[^0-9\+]/', '', $_POST['telefone']);
+        $acesso = $_POST['acesso'];
+        $pa = $_POST['pa'];
+        $setor = $_POST['setor'];
+    
+        // Verifica se há campos vazios
+        if(empty($nome) || empty($cpf) || empty($email) || empty($ramal) || empty($telefone) || empty($pa) || empty($setor)){
+            echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Existem campos pendentes.",
+                });
+            </script>';
+        } else {
+            // Verifica se o ramal já está cadastrado
+            $verifyRamal = $pdo->prepare("SELECT * FROM usuarios WHERE ramal = ?");
+            $verifyRamal->bindParam(1, $ramal);
+            $verifyRamal->execute();
+            $ramalResult = $verifyRamal->fetchAll(PDO::FETCH_ASSOC);
+    
+            if($ramalResult){
+                echo '<script>
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Ramal já cadastrado.",
+                    });
+                </script>';
+            } else {
+                // Verifica se o CPF já está cadastrado
+                $verifyCpf = $pdo->prepare("SELECT * FROM usuarios WHERE cpf = ?");
+                $verifyCpf->bindParam(1, $cpf);
+                $verifyCpf->execute();
+                $cpfResult = $verifyCpf->fetchAll(PDO::FETCH_ASSOC);
+    
+                if($cpfResult){
+                    echo '<script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Este CPF já foi cadastrado.",
+                        });
+                    </script>';
+                } else {
+                    // Insere usuário no banco de dados
+                    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+                    $stmt = $pdo->prepare("INSERT INTO usuarios(nome, cpf, email, ramal, telefone, senha, acesso, pa, setor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bindParam(1, $nome);
+                    $stmt->bindParam(2, $cpf);
+                    $stmt->bindParam(3, $email);
+                    $stmt->bindParam(4, $ramal);
+                    $stmt->bindParam(5, $telefone);
+                    $stmt->bindParam(6, $senhaHash);
+                    $stmt->bindParam(7, $acesso);
+                    $stmt->bindParam(8, $pa);
+                    $stmt->bindParam(9, $setor);
+    
+                    if($stmt->execute()){
+                        echo '<script>
+                            Swal.fire({
+                                title: "Usuário cadastrado!",
+                                text: "Deseja cadastrar outro colaborador?",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                cancelButtonText: "Cancelar",
+                                confirmButtonText: "Sim, desejo!"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    });
+                                }
+                            });
+                        </script>';
+                    } else {
+                        echo '<script>
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Erro ao cadastrar usuário.",
+                            });
+                        </script>';
+                    }
+                }
+            }
+        }
     }
 ?>
 
@@ -41,90 +134,6 @@
 
 </head>
 <body>
-
-    <?php
-        if(isset($_POST['cadastroSubmit'])){
-            $nome = $_POST['nome'];
-            $cpf = $_POST['cpf'];
-            $email = $_POST['email'];
-            $ramal = $_POST['ramal'];
-            $telefone = $_POST['telefone'];
-            $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-            $acesso = $_POST['acesso'];
-            $pa = $_POST['pa'];
-            $setor = $_POST['setor'];
-
-            $telefone = preg_replace('/[^0-9\+]/', '', $_POST['telefone']);
-            $cpf = preg_replace('/[^0-9\+]/', '', $_POST['cpf']);
-
-            // Verificação de número de telefone
-            $verifyRamal = $pdo->prepare("SELECT * FROM usuarios WHERE ramal = ?");
-            $verifyRamal->bindParam(1, $ramal); // ou $verifyRamal->bindParam(':ramal', $ramal);
-            $verifyRamal->execute();
-            $ramalResult = $verifyRamal->fetchAll(PDO::FETCH_ASSOC);
-            
-            if(empty($nome) || empty($cpf) || empty($email) || empty($ramal) || empty($telefone) || empty($acesso) || empty($pa) || empty($setor)){
-                echo '<script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Existem campos pendentes.",
-                  });
-                  </script>';
-                  return false;
-            }
-            elseif($CpfResult->num_rows > 0){
-                echo '<script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Este CPF já foi cadastrado.",
-                });
-            </script>';
-            return false;
-            }
-            elseif($ramalResult->num_rows > 0){
-                echo '<script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Ramal já cadastrado.",
-                });
-            </script>';
-            return false;
-        }
-        else {
-            $stmt = $mysqli->prepare("INSERT INTO usuarios(nome,cpf,email,ramal,telefone,acesso,pa,setor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssssssssss", $nome, $cpf,$email,$ramal,$telefone,$acesso,$pa,$setor);
-
-            if($stmt->execute()){
-                echo '<script>
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Usuário cadastrado.",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                </script>';
-
-                session_start();
-                $_SESSION['nome'] = $nome;
-                $_SESSION['login'] = $login;
-                $_SESSION['cpf'] = $cpf;
-                $_SESSION['phone'] = $celular;
-
-                $_SESSION['status'] = 'pendente';
-
-                header('Location: verify.php');
-            } else {
-                echo "Erro: " . $stmt->error;
-            }
-        }
-    }
-    ?>
-
-
     <header class="header">
         <div>
             <a href="indexadmin.php"><img src="../img/logo-empresas.png" alt="" class="sicoob-logo"></a>
@@ -208,7 +217,7 @@
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
                 <p class="cadastro-item-cpf">CPF inválido.</p>
-                <input id="cpf" name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required required maxlength="14">
+                <input id="cpf" name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required maxlength="14">
             </div>
         </div>
 
@@ -216,24 +225,24 @@
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
                 <p class="cadastro-item-email">E-mail inválido.</p>
-                <input id="email" name="email" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
+                <input id="email" name="email" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar E-mail</label>
                 <p class="cadastro-item-confirmEmail">E-mails não conferem.</p>
-                <input id="confirmEmail" name="confirmEmail" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br" required>
+                <input id="confirmEmail" name="confirmEmail" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="joao.bernardo@sicoob.com.br">
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ramal</label>
                 <p class="cadastro-item-ramal">Ramal Inválido.</p>
-                <input id="ramal" name="ramal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required required maxlength="4">
+                <input id="ramal" name="ramal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required maxlength="4">
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar Ramal</label>
                 <p class="cadastro-item-confirmRamal">Ramal não confere.</p>
-                <input id="confirmRamal" name="confirmRamal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" required required maxlength="4">
+                <input id="confirmRamal" name="confirmRamal" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1619" maxlength="4">
             </div>
         </div>
         <div class="cadastro-items-left">
@@ -243,14 +252,14 @@
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-                <p class="cadastro-item-confirmRamal">Ramal não confere.</p>
-                <input name="senha" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sicoob@4327" required>
+                <p class="cadastro-item-confirmRamal">Senha errada.</p>
+                <input name="senha" type="password" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sicoob@4327" required>
             </div>
         </div>
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Acesso</label>
-                <select id="acesso" name="acesso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="acesso" name="acesso" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option selected>Selecionar</option>
                     <option value="0">Comum</option>
                     <option value="1">Admin</option>
@@ -258,14 +267,14 @@
             </div>
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PA</label>
-                <select id="pa" name="pa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="pa" name="pa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option selected>Selecionar</option>
                     <option value="Sede">Sede</option>
                     <option value="Américas">Américas</option>
-                    <option value="CampoGrande">Campo Grande</option>
+                    <option value="Campo Grande">Campo Grande</option>
                     <option value="Caxias">Caxias</option>
-                    <option value="NovaIguaçu">Nova Iguaçu</option>
-                    <option value="SãoPaulo">São Paulo</option>
+                    <option value="Nova Iguaçu">Nova Iguaçu</option>
+                    <option value="São Paulo">São Paulo</option>
                     <option value="Centro">Centro - Compartilhado</option>
                     <option value="Icaraí">Icaraí - Compartilhado</option>
                 </select>
@@ -274,7 +283,7 @@
         <div class="cadastro-items-left">
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Setor</label>
-                <select id="setor" name="setor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="setor" name="setor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option selected>Selecionar</option>
                     <option value="Cadastro">Cadastro</option>
                     <option value="Comercial">Comercial</option>
@@ -290,14 +299,8 @@
             </div>
         </div>
         <div class="cadastro-items-left">
-        <div class="flex items-center">
-            <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" required>Eu afirmo que as <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">credenciais estão corretas</a>.</label>
-        </div>
-        </div>
-        <div class="cadastro-items-left">
             <div>
-                <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" name="cadastroSubmit" value="Cadastrar">
+                <input name="cadastrar" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" name="cadastroSubmit" value="Cadastrar">
                 <input type="reset" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" value="Cancelar">
             </div>
         </div>

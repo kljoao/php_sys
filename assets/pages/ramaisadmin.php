@@ -1,14 +1,7 @@
 <?php
-        include('../../app/conection.php');
-        include('../../app/protection.php');
-    
-        if(isset($_POST['logout'])){
-            session_start();
-            session_unset();
-            session_destroy();
-            header("Location: ../../index.php");
-            exit();
-        }
+    include('../../app/conection.php');
+    include('../../app/protection.php');
+    include('../../app/logout.php');
     $sqlview = "SELECT * FROM usuarios ORDER BY nome DESC";
     $result = $pdo->query($sqlview);
 ?>
