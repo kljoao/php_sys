@@ -3,32 +3,33 @@
 // const setor = document.querySelector('#setor');
 // const acesso = document.querySelector('#acesso');
 
-// // VALIDAÇÃO COMPLETA DO NOME
-// const nomeInput = document.querySelector('.nomeInput');
-// const nomeNotificacao = document.querySelector('.cadastro-item-nome');
+// VALIDAÇÃO COMPLETA DO NOME
+const nomeInput = document.querySelector('.nomeInput');
+const nomeNotificacao = document.querySelector('.cadastro-item-nome');
 
-// nomeInput.addEventListener("blur", function(e) {
-//     if(!checkChar(e)) {
-//     e.preventDefault();
-// }
-// });
-// function checkChar(e) {
-//     var char = String.fromCharCode(e.keyCode);
-//     var pattern = '[a-zA-Z ^~´`óòõãáàéèê]';
-//     if (char.match(pattern)) {
-//     return true;
-// }
-// }
+nomeInput.addEventListener("blur", function(e) {
+    if(!checkChar(e)) {
+    e.preventDefault();
+}
+});
+function checkChar(e) {
+    var char = String.fromCharCode(e.keyCode);
+    var pattern = '[a-zA-Z ^~´`óòõãáàéèê]';
+    if (char.match(pattern)) {
+    return true;
+}
+}
 
-// nomeInput.addEventListener('blur', () => {
-//     if(nomeInput.value.length <= 7){
-//         nomeNotificacao.setAttribute('style', 'display: block;');
-//     }
-//     else{
-//         nomeNotificacao.setAttribute('style', 'display: none;');
-//     }
-// });
-// // VALIDAÇÃO COMPLETA DO NOME
+nomeInput.addEventListener('blur', () => {
+    if(nomeInput.value.length <= 7){
+        nomeNotificacao.setAttribute('style', 'display: block;');
+    }
+    else{
+        nomeNotificacao.setAttribute('style', 'display: none;');
+    }
+});
+// VALIDAÇÃO COMPLETA DO NOME
+
 // validCPF = false;
 
 // const cpfInput = document.querySelector('#cpf');
@@ -149,17 +150,17 @@
 // confirmEmail.addEventListener('blur', validConfirmEmail);
 // // Valid Confirm E-mail
 
-// // Validador Telefone
-// const handlePhone = (event) => {
-//     let telefone = event.target
-//     telefone.value = phoneMask(telefone.value)
-//   }
+// Validador Telefone
+const handlePhone = (event) => {
+    let telefone = event.target
+    telefone.value = phoneMask(telefone.value)
+  }
   
-//   const phoneMask = (value) => {
-//     if (!value) return ""
-//     value = value.replace(/\D/g,'')
-//     value = value.replace(/(\d{2})(\d)/,"($1) $2")
-//     value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-//     return value
-//   }
-// // Validador Telefone
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g,'')
+    value = value.replace(/(\d{2})(\d)/,"($1) $2")
+    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
+    return value
+  }
+// Validador Telefone
