@@ -23,3 +23,20 @@ function dropdown(e){
 }
 
 setaDown.addEventListener('click', dropdown);
+
+function exibirConfirmacao(event, idUsuario) {
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: 'Esta ação não pode ser revertida!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            event.target.closest('form').submit();
+        }
+    });
+}

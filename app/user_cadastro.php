@@ -2,7 +2,6 @@
 include('conection.php');
 include('protection.php');
 
-
 if(isset($_POST['cadastrar'])){
     // Recuperando dados do formulário
     $nome = $_POST['nome'];
@@ -17,13 +16,7 @@ if(isset($_POST['cadastrar'])){
 
     // Verifica se há campos vazios
     if(empty($nome) || empty($cpf) || empty($email) || empty($ramal) || empty($telefone) || empty($pa) || empty($setor)){
-        echo '<script>
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Existem campos pendentes.",
-            });
-        </script>';
+        $response = array('success' => false, 'message' => 'Existem campos pendentes.');
     } else {
         // Verifica se o ramal já está cadastrado
         $verifyRamal = $pdo->prepare("SELECT * FROM usuarios WHERE ramal = ?");
@@ -32,13 +25,7 @@ if(isset($_POST['cadastrar'])){
         $ramalResult = $verifyRamal->fetchAll(PDO::FETCH_ASSOC);
 
         if($ramalResult){
-            echo '<script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Ramal já cadastrado.",
-                });
-            </script>';
+            $response = array('success' => false, 'message' => 'Ramal já cadastrado.');
         } else {
             // Verifica se o CPF já está cadastrado
             $verifyCpf = $pdo->prepare("SELECT * FROM usuarios WHERE cpf = ?");
@@ -47,13 +34,7 @@ if(isset($_POST['cadastrar'])){
             $cpfResult = $verifyCpf->fetchAll(PDO::FETCH_ASSOC);
 
             if($cpfResult){
-                echo '<script>
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Este CPF já foi cadastrado.",
-                    });
-                </script>';
+                $response = array('success' => false, 'message' => 'Este CPF já foi cadastrado.');
             } else {
                 // Insere usuário no banco de dados
                 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
@@ -69,39 +50,17 @@ if(isset($_POST['cadastrar'])){
                 $stmt->bindParam(9, $setor);
 
                 if($stmt->execute()){
-                    echo '<script>
-                        Swal.fire({
-                            title: "Usuário cadastrado!",
-                            text: "Deseja cadastrar outro colaborador?",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            cancelButtonText: "Cancelar",
-                            confirmButtonText: "Sim, desejo!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-                            }
-                        });
-                    </script>';
+                    $response = array('success' => true, 'message' => 'Usuário cadastrado com sucesso.');
                 } else {
-                    echo '<script>
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Erro ao cadastrar usuário.",
-                        });
-                    </script>';
+                    $response = array('success' => false, 'message' => 'Erro ao cadastrar usuário.');
                 }
             }
         }
     }
+
+    // Retorna a resposta como JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit();
 }
-
-
 ?>

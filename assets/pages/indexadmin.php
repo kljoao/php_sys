@@ -213,7 +213,7 @@
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-building-columns"></i>
-                <a href="#">
+                <a href="https://gestaodepessoas.sicoob.com.br/">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Cursos</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Acesso direto ao universisdade Sicoob, onde você acessa todos os seus cursos.</p>
@@ -228,7 +228,7 @@
 
             <div class="big-links max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <i class="found-icons fa-solid fa-ticket-simple"></i>
-                <a href="#">
+                <a href="https://atendimento.sisbr.coop.br/tas/public/ssp/">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portal CCS</h5>
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Portal para abertura de chamados junto a Central, ou nossa Confederação.</p>

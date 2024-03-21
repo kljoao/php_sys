@@ -2,7 +2,7 @@
     include('../../app/conection.php');
     include('../../app/protection.php');
     include('../../app/logout.php');
-    include('../../app/cadastro.php');
+    include('../../app/user_cadastro.php');
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +118,7 @@
             <div>
                 <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
                 <p class="cadastro-item-cpf">CPF inválido.</p>
-                <input id="cpf" name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required maxlength="14">
+                <input id="cpf" name="cpf" type="text" class="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CPF" required maxlength="11">
             </div>
         </div>
 
@@ -201,7 +201,7 @@
         </div>
         <div class="cadastro-items-left">
             <div>
-                <input name="cadastrar" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" name="cadastroSubmit" value="Cadastrar">
+                <input name="cadastrar" id="btnEnviar" type="submit" class="submit-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" name="cadastroSubmit" value="Cadastrar">
                 <input type="reset" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" value="Cancelar">
             </div>
         </div>
