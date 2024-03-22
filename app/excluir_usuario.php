@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$idUsuario]);
         
         // Redirecione de volta para a página de ramais após a exclusão
-        header("Location: ramaisadmin.php");
+        header("Location: ../assets/pages/ramaisadmin.php");
         exit();
     } else {
         // Se o ID do usuário não foi enviado, exiba uma mensagem de erro
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // Se não for uma solicitação POST, redirecione de volta para a página de ramais
-    header("Location: ramaisadmin.php");
+    header("Location: ../assets/pages/ramaisadmin.php");
     exit();
 }
 ?>
